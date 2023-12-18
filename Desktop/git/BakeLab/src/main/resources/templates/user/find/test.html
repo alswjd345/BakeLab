@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>실습</title>
+</head>
+<style>
+  div{
+    width: 10rem;
+    padding: 0.5rem 1rem;
+  }
+  .bold{
+    font-weight: bold;
+  }
+  .bg{
+    background-color: beige;
+  }
+  .center{
+    text-align: center;
+  }
+  .border{
+    border: 3px solid black;
+  }
+
+</style>
+<body>
+<fieldset>
+  <input onclick="toggle_class('bold')" type="checkbox" id="bold-check">
+  <label for="bold-check">진하게</label>
+
+  <input onclick="toggle_class('bg')" type="checkbox" id="bg-check">
+  <label for="bg-check">배경색</label>
+
+  <input onclick="toggle_class('center')" type="checkbox" id="center-check">
+  <label for="center-check">중앙정렬</label>
+
+  <input onclick="toggle_class('border')" type="checkbox" id="border-check">
+  <label for="border-check">테두리ON/OFF</label>
+</fieldset>
+
+<fieldset>
+  <input onclick="change_border(this)" class="solid" type="radio" id="solid-check" name="border" checked>
+  <label for="solid-check">솔리드선</label>
+
+  <input onclick="change_border(this)" class="dotted" type="radio" id="dotted-check" name="border">
+  <label for="dotted-check">도트선</label>
+
+  <input onclick="change_border(this)" class="dashed" type="radio" id="dashed-check" name="border">
+  <label for="dashed-check">대시선</label>
+
+  <input onclick="change_border(this)" class="double" type="radio" id="double-check" name="border">
+  <label for="double-check">더블선</label>
+</fieldset>
+
+<div>오늘의 메뉴</div>
+</body>
+</html>
+<script>
+  let div = document.querySelector('div');
+  let borderStyles = document.getElementsByName('border');
+
+  function toggle_class(className){
+    div.classList.toggle(className);
+    change_border('none');
+  }
+
+  function change_border(borderStyle){
+    if(!div.classList.contains('border')){
+      div.style.borderStyle = 'none';
+    }
+    else if(borderStyle === 'none'){
+      div.style.borderStyle = get_name_of_style();
+    }
+    else{
+      div.style.borderStyle = borderStyle.className;
+    }
+  }
+
+  function get_name_of_style(){
+    for(let i = 0; i < borderStyles.length; i++){
+      if(borderStyles.item(i).checked){
+        return borderStyles.item(i).className;
+      }
+    }
+    return 'none';
+  }
+
+
+</script>
+
+
+
+
